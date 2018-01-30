@@ -14,7 +14,7 @@ export GOPATH=$BOSH_INSTALL_TARGET
 export GOROOT=${golang_pkg_dir}
 export PATH=$GOROOT/bin:$PATH
 
-go install github.com/sykesm/kubernetes-cpi/cmd/cpi
+go install github.com/evoila/kubernetes-cpi/cmd/cpi
 
 # clean up source artifacts
 rm -rf ${BOSH_INSTALL_TARGET}/src ${BOSH_INSTALL_TARGET}/pkg

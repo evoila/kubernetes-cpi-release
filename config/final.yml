@@ -1,6 +1,7 @@
 ---
 final_name: kubernetes-cpi
 blobstore:
-  provider: dav
+  provider: s3
   options:
-    endpoint: https://blobs.go.dyndns.org
+    bucket_name: kubernetes-cpi-release
+    region: eu-central-1

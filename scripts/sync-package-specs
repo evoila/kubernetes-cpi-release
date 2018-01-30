@@ -32,7 +32,7 @@ function sync_package() {
   )
 }
 
-sync_package kubernetes_cpi -app github.com/sykesm/kubernetes-cpi/cmd/cpi &
+sync_package kubernetes_cpi -app github.com/evoila/kubernetes-cpi/cmd/cpi &
 wait
 
 git diff --name-only packages/*/spec

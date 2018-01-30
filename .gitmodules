@@ -1,30 +1,55 @@
-[submodule "src/github.com/sykesm/kubernetes-cpi"]
-	path = src/github.com/sykesm/kubernetes-cpi
-	url = https://github.com/sykesm/kubernetes-cpi
+[submodule "src/github.com/evoila/kubernetes-cpi"]
+	path = src/github.com/evoila/kubernetes-cpi
+	url = https://github.com/evoila/kubernetes-cpi
+[submodule "src/code.cloudfoundry.org/clock"]
+	path = src/code.cloudfoundry.org/clock
+	url = https://github.com/cloudfoundry/clock
+[submodule "src/github.com/nu7hatch/gouuid"]
+	path = src/github.com/nu7hatch/gouuid
+	url = https://github.com/nu7hatch/gouuid
+[submodule "src/k8s.io/apimachinery"]
+	path = src/k8s.io/apimachinery
+	url = https://github.com/kubernetes/apimachinery
+[submodule "src/k8s.io/api"]
+	path = src/k8s.io/api
+	url = https://github.com/kubernetes/api
+[submodule "src/k8s.io/kube-openapi"]
+	path = src/k8s.io/kube-openapi
+	url = https://github.com/kubernetes/kube-openapi
+
+[submodule "src/gopkg.in/yaml.v2"]
+	path = src/gopkg.in/yaml.v2
+	url = https://gopkg.in/yaml.v2
+[submodule "src/github.com/golang/glog"]
+	path = src/github.com/golang/glog
+	url = https://github.com/golang/glog
+[submodule "src/github.com/googleapis/gnostic"]
+	path = src/github.com/googleapis/gnostic
+	url = https://github.com/googleapis/gnostic
+
+[submodule "src/github.com/vito/gosub"]
+	path = src/github.com/vito/gosub
+	url = https://github.com/vito/gosub
+[submodule "src/github.com/cloudfoundry/bosh-agent"]
+	path = src/github.com/cloudfoundry/bosh-agent
+	url = https://github.com/cloudfoundry/bosh-agent
+[submodule "src/github.com/google/gofuzz"]
+	path = src/github.com/google/gofuzz
+	url = https://github.com/google/gofuzz
+[submodule "src/github.com/golang/protobuf"]
+	path = src/github.com/golang/protobuf
+	url = https://github.com/golang/protobuf
+
+[submodule "github.com/golang/text"]
+	path = src/github.com/golang/x/text
+	url = https://github.com/golang/text
+[submodule "github.com/golang/net"]
+	path = src/github.com/golang/x/net
+	url = https://github.com/golang/net
+
 [submodule "src/github.com/onsi/ginkgo"]
 	path = src/github.com/onsi/ginkgo
 	url = https://github.com/onsi/ginkgo
 [submodule "src/github.com/onsi/gomega"]
 	path = src/github.com/onsi/gomega
 	url = https://github.com/onsi/gomega
-[submodule "src/gopkg.in/yaml.v2"]
-	path = src/gopkg.in/yaml.v2
-	url = https://gopkg.in/yaml.v2
-[submodule "src/github.com/vito/gosub"]
-	path = src/github.com/vito/gosub
-	url = https://github.com/vito/gosub
-[submodule "src/k8s.io/client-go"]
-	path = src/k8s.io/client-go
-	url = https://github.com/kubernetes/client-go
-[submodule "src/github.com/cloudfoundry/bosh-agent"]
-	path = src/github.com/cloudfoundry/bosh-agent
-	url = https://github.com/cloudfoundry/bosh-agent
-[submodule "src/github.com/golang/protobuf"]
-	path = src/github.com/golang/protobuf
-	url = https://github.com/golang/protobuf
-[submodule "src/github.com/nu7hatch/gouuid"]
-	path = src/github.com/nu7hatch/gouuid
-	url = https://github.com/nu7hatch/gouuid
-[submodule "src/code.cloudfoundry.org/clock"]
-	path = src/code.cloudfoundry.org/clock
-	url = https://github.com/cloudfoundry/clock

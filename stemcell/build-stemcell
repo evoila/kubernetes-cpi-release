@@ -9,7 +9,7 @@ set -e
 #     jq -r 'max_by(.version | tonumber) | .version + " " +.regular.url'
 # )
 
-stemcell_version=3312
+stemcell_version=3468.15
 stemcell_url=https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-trusty-go_agent?v=${stemcell_version}
 
 # Local directory for build
@@ -23,10 +23,10 @@ wget --quiet -O - ${stemcell_url} | tar -C build -zx
 
 # Build the image and tag it with the stemcell version from bosh.io metadata
 mv build/image build/image.tgz
-docker build -t sykesm/kubernetes-stemcell:${stemcell_version} . && rm build/image.tgz
+docker build -t evoila/kubernetes-stemcell:${stemcell_version} . && rm build/image.tgz
 
 # Tag the versioned image as latest
-docker tag sykesm/kubernetes-stemcell:${stemcell_version} sykesm/kubernetes-stemcell:latest
+docker tag evoila/kubernetes-stemcell:${stemcell_version} evoila/kubernetes-stemcell:latest
 
 # Create the stemcell archive
 touch build/image
@@ -37,7 +37,7 @@ version: "$stemcell_version"
 sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 operating_system: ubuntu-trusty
 cloud_properties:
-  image: "sykesm/kubernetes-stemcell:$stemcell_version"
+  image: "evoila/kubernetes-stemcell:$stemcell_version"
 MF_EOF
 
 # Delete the agent binary
