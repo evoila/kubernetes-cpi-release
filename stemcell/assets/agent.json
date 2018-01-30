@@ -1,0 +1,21 @@
+{
+  "Platform": {
+    "Linux": {
+      "SkipDiskSetup": true,
+      "UsePreformattedPersistentDisk": true,
+      "UseDefaultTmpDir": true,
+      "BindMountPersistentDisk": true
+    }
+  },
+  "Infrastructure": {
+    "Settings": {
+      "UseRegistry": true,
+      "Sources": [
+        {
+          "Type": "File",
+          "SettingsPath": "/var/vcap/bosh/instance_settings.json"
+        }
+      ]
+    }
+  }
+}

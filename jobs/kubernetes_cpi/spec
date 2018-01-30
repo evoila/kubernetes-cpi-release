@@ -1,0 +1,59 @@
+---
+name: kubernetes_cpi
+
+templates:
+  cpi.erb: bin/cpi
+  cpi.json.erb: config/cpi.json
+  agent.json.erb: config/agent.json
+
+  cpi_ctl.erb:  bin/cpi_ctl
+
+packages:
+- kubernetes_cpi
+
+properties:
+  agent.mbus:
+    description: Message bus URL
+    example: https://admin:password@0.0.0.0:6868
+
+  blobstore:
+    description: Provider and options for the blob store
+    example:
+      blobstore:
+        provider: local
+        path: /var/vcap/micro_bosh/data/cache
+
+  ntp:
+    description: List of NTP servers
+    example: [ "0.pool.ntp.org", "1.pool.ntp.org" ]
+
+  kubeconfig:
+    description: |
+      The list of clusters that can be referenced by the CPI, information about how to authenticate
+      with clusters, named contexts that associate authentication information and namespace with a cluster,
+      and the name of the default context to use.
+    example:
+      kubeconfig:
+        clusters:
+          minikube:
+            certificate-authority-data: |
+              -----BEGIN CERTIFICATE-----
+              ...
+              -----END CERTIFICATE-----
+            server: https://192.168.64.17:8443
+          contexts:
+            minikube:
+              cluster: minikube
+              user: minikube
+              namespace: bosh
+          current-context: minikube
+          users:
+            minikube:
+              client-certificate-data: |
+                -----BEGIN CERTIFICATE-----
+                ...
+                -----END CERTIFICATE-----
+              client-key-data: |
+                -----BEGIN RSA PRIVATE KEY-----
+                ...
+                -----END RSA PRIVATE KEY-----
