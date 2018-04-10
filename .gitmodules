@@ -16,7 +16,6 @@
 [submodule "src/k8s.io/kube-openapi"]
 	path = src/k8s.io/kube-openapi
 	url = https://github.com/kubernetes/kube-openapi
-
 [submodule "src/gopkg.in/yaml.v2"]
 	path = src/gopkg.in/yaml.v2
 	url = https://gopkg.in/yaml.v2
@@ -26,7 +25,6 @@
 [submodule "src/github.com/googleapis/gnostic"]
 	path = src/github.com/googleapis/gnostic
 	url = https://github.com/googleapis/gnostic
-
 [submodule "src/github.com/vito/gosub"]
 	path = src/github.com/vito/gosub
 	url = https://github.com/vito/gosub
@@ -39,17 +37,21 @@
 [submodule "src/github.com/golang/protobuf"]
 	path = src/github.com/golang/protobuf
 	url = https://github.com/golang/protobuf
-
 [submodule "github.com/golang/text"]
 	path = src/github.com/golang/x/text
 	url = https://github.com/golang/text
 [submodule "github.com/golang/net"]
 	path = src/github.com/golang/x/net
 	url = https://github.com/golang/net
-
 [submodule "src/github.com/onsi/ginkgo"]
 	path = src/github.com/onsi/ginkgo
 	url = https://github.com/onsi/ginkgo
 [submodule "src/github.com/onsi/gomega"]
 	path = src/github.com/onsi/gomega
 	url = https://github.com/onsi/gomega
+[submodule "src/github.com/golang/x/text"]
+	path = src/github.com/golang/x/text
+	url = https://github.com/golang/text
+[submodule "src/github.com/golang/x/net"]
+	path = src/github.com/golang/x/net
+	url = https://github.com/golang/net
