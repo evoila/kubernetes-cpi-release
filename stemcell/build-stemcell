@@ -9,24 +9,27 @@ set -e
 #     jq -r 'max_by(.version | tonumber) | .version + " " +.regular.url'
 # )
 
-stemcell_version=3468.15
+stemcell_version=3541.12
 stemcell_url=https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-trusty-go_agent?v=${stemcell_version}
 
 # Local directory for build
 mkdir -p build
 
+# Create file for pushing latest version
+echo ${stemcell_version} > latest
+
 # Build the agent
 GOOS=linux GOARCH=amd64 go build -o build/bosh-agent github.com/cloudfoundry/bosh-agent/main
 
 # Download the latest stemcell and extract
-wget --quiet -O - ${stemcell_url} | tar -C build -zx
+wget -O - ${stemcell_url} | tar -C build -zx
 
 # Build the image and tag it with the stemcell version from bosh.io metadata
 mv build/image build/image.tgz
-docker build -t evoila/kubernetes-stemcell:${stemcell_version} . && rm build/image.tgz
+docker build -t evoila/kubernetes-cpi:${stemcell_version} . && rm build/image.tgz
 
 # Tag the versioned image as latest
-docker tag evoila/kubernetes-stemcell:${stemcell_version} evoila/kubernetes-stemcell:latest
+docker tag evoila/kubernetes-cpi:${stemcell_version} evoila/kubernetes-cpi:latest
 
 # Create the stemcell archive
 touch build/image
@@ -37,7 +40,7 @@ version: "$stemcell_version"
 sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 operating_system: ubuntu-trusty
 cloud_properties:
-  image: "evoila/kubernetes-stemcell:$stemcell_version"
+  image: "evoila/kubernetes-cpi:$stemcell_version"
 MF_EOF
 
 # Delete the agent binary
