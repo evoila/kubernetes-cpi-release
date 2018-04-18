@@ -1,3 +1,6 @@
 [submodule "src/github.com/evoila/kubernetes-cpi"]
 	path = src/github.com/evoila/kubernetes-cpi
 	url = https://github.com/evoila/kubernetes-cpi
+[submodule "scripts/deployment/bosh-deployment"]
+	path = scripts/deployment/bosh-deployment
+	url = https://github.com/cloudfoundry/bosh-deployment
