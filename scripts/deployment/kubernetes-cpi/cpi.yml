@@ -1,0 +1,111 @@
+---
+- type: replace
+  path: /releases/-
+  value:
+    name: kubernetes-cpi
+    url: file://((cpi_path))
+
+- type: replace
+  path: /resource_pools/name=vms/stemcell?
+  value:
+    url: file://((stemcell_path))
+
+# Configure sizes
+- type: replace
+  path: /resource_pools/name=vms/cloud_properties?
+  value:
+    resources:
+      requests:
+        memory: 64Mi
+      limits:
+        memory: 1Gi
+
+- type: replace
+  path: /disk_pools/name=disks/disk_size
+  value: 10_000
+
+# Add CPI job
+- type: replace
+  path: /instance_groups/name=bosh/jobs/-
+  value: &cpi_job
+    name: kubernetes_cpi
+    release: kubernetes-cpi
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/ntp
+  value:
+  - 0.pool.ntp.org
+  - 1.pool.ntp.org
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/director/cpi_job?
+  value: kubernetes_cpi
+
+- type: replace
+  path: /cloud_provider/template?
+  value:
+    name: kubernetes_cpi
+    release: kubernetes-cpi
+
+- type: replace
+  path: /networks/name=default
+  value:
+    name: default
+    type: dynamic
+
+- type: replace
+  path: /cloud_provider/mbus
+  value:
+    https://mbus:((mbus_bootstrap_password))@((node_ip)):31002
+
+- type: replace
+  path: /variables/name=mbus_bootstrap_ssl/options/alternative_names/-
+  value: ((node_ip))
+
+- type: replace
+  path: /variables/name=director_ssl/options/alternative_names/-
+  value: ((node_ip))
+
+- type: replace
+  path: /cloud_provider/properties/kubeconfig?
+  value: 
+    kubeconfig: 
+    clusters:
+      kubernetes:
+        certificate_authority_data: |
+          ((ca_data))
+        server: https://((kube_apiserver))
+    contexts:
+      kubernetes:
+        cluster: kubernetes
+        user: admin
+        namespace: bosh
+    current_context: kubernetes
+    users:
+      admin:
+        client_certificate_data: |
+          ((client_data))
+        client_key_data: |
+          ((client_key))
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/kubeconfig?
+  value: 
+    kubeconfig: 
+    clusters:
+      kubernetes:
+        certificate_authority_data: |
+          ((ca_data))
+        server: https://((kube_apiserver))
+    contexts:
+      kubernetes:
+        cluster: kubernetes
+        user: admin
+        namespace: bosh
+    current_context: kubernetes
+    users:
+      admin:
+        client_certificate_data: |
+          ((client_data))
+        client_key_data: |
+          ((client_key))
