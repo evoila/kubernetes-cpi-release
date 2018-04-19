@@ -3,6 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: bosh-external
+  namespace: bosh
   labels:
     bosh.cloudfoundry.org/deployment: bosh
 spec:
