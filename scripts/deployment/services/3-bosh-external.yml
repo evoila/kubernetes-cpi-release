@@ -1,0 +1,20 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: bosh-external
+  labels:
+    bosh.cloudfoundry.org/deployment: bosh
+spec:
+  selector:
+    bosh.cloudfoundry.org/deployment: bosh
+  ports:
+    - name: director
+      port: 25555
+      targetPort: 25555
+      nodePort: 31003
+    - name: create-env
+      port: 6868
+      targetPort: 6868
+      nodePort: 31002
+  type: NodePort
