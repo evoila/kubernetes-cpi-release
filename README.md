@@ -167,6 +167,13 @@ Once the director is up, it's time to deploy something.
 
 ### Minikube Workarounds
 
+Currently there is a bug, that minikube pods are unable to reach themselves through a service [minikube#1568](https://github.com/kubernetes/minikube/issues/1568).  
+But there is a workaround known to solve this issue
+```
+$ minikube ssh
+$ sudo ip link set docker0 promisc on
+```
+
 ## Issues
 
 BOSH was built to assume that it's managing _virtual machines_. These
