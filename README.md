@@ -4,9 +4,112 @@ This is an experimental release of a BOSH Cloud Provider that targets
 Kubernetes clusters. The goal is to deploy and management of BOSH packaged
 software on Kubernetes nodes.
 
-## Installation 
+## Installation
 
-* go get github.com/cloudfoundry/bosh-agent
+### Requirements
+
+* Configured Go Path
+* [Go Binaries](https://golang.org/)
+* [Godep](https://github.com/tools/godep)
+* [Glide](https://github.com/Masterminds/glide)
+* [Bosh CLI](https://bosh.io/docs/cli-v2/)
+* [Docker](https://docs.docker.com/install/)
+* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) configured to access kubernetes
+
+### Creating a stemcell
+
+Clone the repository
+```
+$ git clone https://github.com/evoila/kubernetes-cpi-release.git
+```
+
+Get the required bosh agent  
+```
+$ go get github.com/cloudfoundry/bosh-agent
+ ```
+Edit the build script in `kubernetes-cpi-release/stemcell` and execute it.  
+The latest version number you can use can be found [here](https://bosh.io/stemcells/bosh-warden-boshlite-ubuntu-trusty-go_agent).  
+Upload the latest stemcell to docker hub with the `push-image` script.
+
+### Creating the kubernetes-cpi-release
+
+Download the CPI submodule dependencies
+```
+$ cd kubernetes-cpi-release
+$ git submodule init
+$ git submodule update
+```
+
+Clone the kubernetes-cpi into GOPATH
+```
+$ mkdir -p $GOPATH/src/github.com/evoila
+$ cd $GOPATH/src/github.com/evoila
+$ git clone https://github.com/evoila/kubernetes-cpi.git
+```
+Download the dependencies of the kubernetes-cpi
+```
+$ cd $GOPATH/src/github.com/evoila/kubernetes-cpi/
+$ glide update
+```
+
+Because the dependencies of the kubernetes-cpi won't automatically get copied into the kubernetes-cpi-release folder it is necessary to execute the glide update there too
+```
+$ cd kubernetes-cpi-release/src/github.com/evoila/kubernetes-cpi/
+$ glide update
+```
+
+Sync the kubernetes-cpi package specs
+```
+$ cd kubernetes-cpi-release
+$ ./scripts/sync-package-specs
+```
+
+Download the necessary golang source files
+```
+$ cd kubernetes-cpi-release
+$ mkdir -p ./src/golang
+$ wget -P ./src/golang https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz
+```
+
+Create the bosh release tarball
+```
+$ cd kubernetes-cpi-release
+$ bosh create-release --tarball=./kubernetes-cpi-release-1.tgz --force
+```
+
+### Deploying the bosh director
+
+**Note:** Make sure that Kubernetes got a default storageclass configured, else the deployment will fail.  
+
+Create the necessary namespace and services for bosh
+```
+$ kubectl create -f ./scripts/services/
+```
+These services are needed for internal and external communication.  
+Edit the files located in `./scripts/deployment/kubeconfig` that they match your certificates of your kubernetes cluster.  
+Edit all variables marked with `<...>` in the deployment script `./scripts/start.sh` that it matches your configuration.  
+Execute the script
+```
+$ cd kubernetes-cpi-release
+$ ./scripts/start.sh
+```
+Wait for the deployment to finish.
+Update the bosh director cloud-config (Login Credentials for the bosh deployment can be found in `./scripts/deployment/bosh-env/creds.yml`)
+```
+$ bosh -e kubernetes login
+Using environment 'x.x.x.x:31003'
+
+Username (): admin
+Password ():
+
+Using environment 'x.x.x.x:31003' as client 'admin'
+$ bosh -e kubernetes update-cloud-config ./scripts/deployment/kubernetes-cpi/cloud-config.yml
+```
+Upload the stemcell to the bosh director
+```
+bosh -e kubernetes upload-stemcell ./stemcell/bosh-stemcell-xxxx.xx-kubernetes-ubuntu-trusty-go_agent.tgz
+```
+After that you will have a working bosh director in a kubernetes cluster.
 
 ## Current Status
 
