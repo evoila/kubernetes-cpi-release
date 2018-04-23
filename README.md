@@ -27,7 +27,7 @@ Get the required bosh agent
 ```
 $ go get github.com/cloudfoundry/bosh-agent
  ```
-Edit the build script in `kubernetes-cpi-release/stemcell` and execute it.  
+Edit the build script `kubernetes-cpi-release/stemcell/build-stemcell` and execute it.  
 The latest version number you can use can be found [here](https://bosh.io/stemcells/bosh-warden-boshlite-ubuntu-trusty-go_agent).  
 Upload the latest stemcell to docker hub with the `push-image` script.
 
@@ -62,13 +62,6 @@ Sync the kubernetes-cpi package specs
 ```
 $ cd kubernetes-cpi-release
 $ ./scripts/sync-package-specs
-```
-
-Download the necessary golang source files
-```
-$ cd kubernetes-cpi-release
-$ mkdir -p ./src/golang
-$ wget -P ./src/golang https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz
 ```
 
 Create the bosh release tarball
