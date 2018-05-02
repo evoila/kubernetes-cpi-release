@@ -76,7 +76,7 @@ $ bosh create-release --tarball=./kubernetes-cpi-release-1.tgz --force
 
 Create the necessary namespace and services for bosh
 ```
-$ kubectl create -f ./scripts/services/
+$ kubectl create -f ./scripts/deployment/services/
 ```
 These services are needed for internal and external communication.  
 Edit the files located in `./scripts/deployment/kubeconfig` that they match your certificates of your kubernetes cluster.  
