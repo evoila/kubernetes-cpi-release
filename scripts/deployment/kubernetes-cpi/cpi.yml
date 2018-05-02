@@ -18,7 +18,7 @@
       requests:
         memory: 64Mi
       limits:
-        memory: 1Gi
+        memory: 2Gi
 
 - type: replace
   path: /disk_pools/name=disks/disk_size
@@ -52,11 +52,12 @@
   value:
     name: default
     type: dynamic
+    dns: [8.8.8.8]
 
 - type: replace
   path: /cloud_provider/mbus
   value:
-    https://mbus:((mbus_bootstrap_password))@((node_ip)):31002
+    https://mbus:((mbus_bootstrap_password))@((node_ip)):31000
 
 - type: replace
   path: /variables/name=mbus_bootstrap_ssl/options/alternative_names/-
