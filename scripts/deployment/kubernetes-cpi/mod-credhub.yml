@@ -1,0 +1,15 @@
+- type: replace
+  path: /instance_groups/name=bosh/jobs/name=credhub/properties/credhub/authentication/uaa/url
+  value: "https://((node_ip)):31003"
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/director/config_server/url
+  value: "https://((node_ip)):31004/api/"
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/director/config_server/uaa/url
+  value: "https://((node_ip)):31003"
+
+- type: replace
+  path: /variables/name=credhub_tls/options/alternative_names/-
+  value: ((node_ip))

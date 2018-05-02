@@ -26,4 +26,8 @@ spec:
       port: 8443
       targetPort: 8443
       nodePort: 31003
+    - name: config-server
+      port: 8844
+      targetPort: 8844
+      nodePort: 31004
   type: NodePort

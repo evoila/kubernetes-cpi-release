@@ -18,6 +18,8 @@ pushd $BASE_DIR
     -o $BOSH_DEPLOYMENT/jumpbox-user.yml \
     -o $BOSH_DEPLOYMENT/uaa.yml \
     -o $BASE_DIR/kubernetes-cpi/mod-uaa.yml \
+    -o $BOSH_DEPLOYMENT/credhub.yml \
+    -o $BASE_DIR/kubernetes-cpi/mod-credhub.yml \
     --state ./bosh-env/state.json \
     --vars-store ./bosh-env/creds.yml \
     --var-file=vcap_public_key=bosh-env/bosh.key.pub \
