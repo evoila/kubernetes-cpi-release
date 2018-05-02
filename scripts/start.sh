@@ -15,6 +15,7 @@ pushd $BASE_DIR
  bosh create-env \
     $BOSH_DEPLOYMENT/bosh.yml \
     -o $BASE_DIR/kubernetes-cpi/cpi.yml \
+    -o $BOSH_DEPLOYMENT/jumpbox-user.yml \
     --state ./bosh-env/state.json \
     --vars-store ./bosh-env/creds.yml \
     --var-file=vcap_public_key=bosh-env/bosh.key.pub \
@@ -27,10 +28,10 @@ pushd $BASE_DIR
     --var-file=ca_data=$BASE_DIR/kubeconfig/ca_data \
     --var-file=client_data=$BASE_DIR/kubeconfig/client_data \
     --var-file=client_key=$BASE_DIR/kubeconfig/client_key \
-    -v create_env_port=31002 
+    -v create_env_port=31000
     
   echo "Creating env alias: kubernetes"
-  bosh -e <ip to kubernetes node with kube-proxy running>:31003 \
+  bosh -e <ip to kubernetes node with kube-proxy running>:31001 \
       --ca-cert <(bosh int ./bosh-env/creds.yml --path /director_ssl/ca) \
       alias-env kubernetes
 

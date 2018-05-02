@@ -10,12 +10,16 @@ spec:
   selector:
     bosh.cloudfoundry.org/deployment: bosh
   ports:
-    - name: director
-      port: 25555
-      targetPort: 25555
-      nodePort: 31003
     - name: create-env
       port: 6868
       targetPort: 6868
+      nodePort: 31000
+    - name: director
+      port: 25555
+      targetPort: 25555
+      nodePort: 31001
+    - name: ssh
+      port: 22
+      targetPort: 22
       nodePort: 31002
   type: NodePort
