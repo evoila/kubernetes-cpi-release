@@ -1,0 +1,25 @@
+#!/bin/sh
+if [ -f /var/vcap/bosh/agent_state.json ]
+then
+	rm /var/vcap/bosh/agent_state.json
+	if [ -d /var/vcap/store ]
+	then
+		if [ -f /var/vcap/bosh/managed_disk_settings.json ]
+		then
+			pos=$(cat /var/vcap/bosh/managed_disk_settings.json | grep -b -o : | awk 'BEGIN {FS=":"}{print $1}')
+			folder=$(cut /var/vcap/bosh/managed_disk_settings.json -c$(expr $pos + 2)-)
+			device=$(df -P /mnt/$folder | tail -1 | cut -d' ' -f 1)
+			mount $device /var/vcap/store
+		fi
+		chmod 777 /var/vcap/store
+	fi
+else
+	cp -R /startup/* /var/vcap
+fi
+
+if [ x`mount | grep -c /var/vcap/data/sys/run` = x0 ] ; then rm -f /etc/service/monit ; fi
+
+PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
+
+exec env - PATH=$PATH \
+runsvdir -P /etc/service 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
