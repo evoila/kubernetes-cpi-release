@@ -104,6 +104,18 @@ bosh -e kubernetes upload-stemcell ./stemcell/bosh-stemcell-xxxx.xx-kubernetes-u
 ```
 After that you will have a working bosh director in a kubernetes cluster.
 
+### Acessing Bosh VMS over Bosh SSH
+
+Because the Bosh director returns the internal Kubernetes VXLAN IP addresses, it is necessary to use the Bosh CLI Tunneling feature in order to use Bosh SSH.
+The `4-jumphost.yml` creates a jumphost with enabled SSH access in the Kubernetes cluster.
+The default user in order to login to SSH is `jumphost` and the password defaults to `"root"`, but is changeable in the `4-jumphost.yml`.  
+Enable the BOSH CLI Tunneling:
+```
+$ ssh -4 -D 12345 -fNC jumphost@<node of ip with kube-proxy running> -p 31005
+$ jumphost@<node of ip with kube-proxy running>'s password:
+$ export BOSH_ALL_PROXY=socks5://localhost:12345
+```
+
 ## Current Status
 
 * light stemcells can be created as docker images that are
