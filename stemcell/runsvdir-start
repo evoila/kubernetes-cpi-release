@@ -17,6 +17,12 @@ else
 	cp -R /startup/* /var/vcap
 fi
 
+if [ ! -d /var/vcap/data ]
+then
+    mkdir -p /var/vcap/data
+	chmod 777 /var/vcap/data
+fi
+
 if [ x`mount | grep -c /var/vcap/data/sys/run` = x0 ] ; then rm -f /etc/service/monit ; fi
 
 PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
