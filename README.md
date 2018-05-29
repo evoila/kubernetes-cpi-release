@@ -79,7 +79,7 @@ Create the necessary namespace and services for bosh
 $ kubectl create -f ./scripts/deployment/services/
 ```
 These services are needed for internal and external communication.  
-Edit the files located in `./scripts/deployment/kubeconfig` that they match your certificates of your kubernetes cluster.  
+Edit the files located in `./scripts/deployment/kubeconfig` that they match your CA certificate and your admin token of your kubernetes cluster.  
 Edit all variables marked with `<...>` in the deployment script `./scripts/start.sh` that it matches your configuration.  
 Execute the script
 ```
