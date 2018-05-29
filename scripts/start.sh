@@ -30,8 +30,7 @@ pushd $BASE_DIR
     -v node_ip="<ip to kubernetes node with kube-proxy running>" \
     -v kube_apiserver="<kube_apiserver_ip:port>" \
     --var-file=ca_data=$BASE_DIR/kubeconfig/ca_data \
-    --var-file=client_data=$BASE_DIR/kubeconfig/client_data \
-    --var-file=client_key=$BASE_DIR/kubeconfig/client_key \
+    --var-file=kube_token=$BASE_DIR/kubeconfig/kube_token \
     -v create_env_port=31000
     
   echo "Creating env alias: kubernetes"

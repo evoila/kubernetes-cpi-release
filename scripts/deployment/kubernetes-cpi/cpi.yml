@@ -84,10 +84,7 @@
     current_context: kubernetes
     users:
       admin:
-        client_certificate_data: |
-          ((client_data))
-        client_key_data: |
-          ((client_key))
+        token: ((kube_token))
 
 - type: replace
   path: /instance_groups/name=bosh/properties/kubeconfig?
@@ -106,7 +103,4 @@
     current_context: kubernetes
     users:
       admin:
-        client_certificate_data: |
-          ((client_data))
-        client_key_data: |
-          ((client_key))
+        token: ((kube_token))
