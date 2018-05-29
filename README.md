@@ -240,9 +240,27 @@ a way to change the list of volumes and mounts on a running pod, we have to
 recreate the pod to attach disks. When we do that, the IP address of the pod
 changes and then BOSH gets really upset about it.
 
+Moreover if one of the pod hosts restarts or a disk gets attached the director
+won't notice the ip change and `bosh vms` for example will return the old ip address.
+In addition to that Bosh DNS will fail, because the director didn't notice the ip change
+and won't refresh the dns entries.
+To fix this problem it is necessary to recreate the deployment, if the host restarts or 
+a disk got attached.
+
 There's currently an open issue with Kubernetes to support [stable IPs][stable-ips]
 but it still has a ways to go. Until then, _manual_ networks should always be
 used to ensure IP address don't change.
+
+#### Disk Limitations
+
+To the issue issue described above, there are some other problems which limit the usage of disk:
+
+* Currently there's only one persistent volume supported at a time, which is reserved for `/var/vcap/store`,
+  because the container loses all mount points in `/proc/mounts` if the host restarts and because the bosh 
+  agent won't reattach disks during bootstrap. To make the restart of a host possible, it is necessary, to 
+  mount the disk extracted from `/var/vcap/bosh/managed_disk_settings.json` at `/var/vcap/store`.
+* Because of the limitation described above it is also not possible to migrate an attached disk.
+
 
 [bosh-init]: https://github.com/cloudfoundry/bosh-init
 [bosh-io]: https://bosh.io/
