@@ -133,9 +133,7 @@ single privileged container that runs the BOSH agent. The container is
 privileged to allow the agent to run commands like `mount` that require
 elevated capabilities.
 
-An `emptyDir` `Volume` is created to act as the ephemeral disk. The contents
-of the volume are permanently deleted when the pod is deleted or moved to a
-different Kubernetes node.
+An `provisionised` `Volume` is created to act as the ephemeral disk at `/var/vcap`.
 
 Pods are named after the BOSH agent they host and any Kubernetes objects
 related to the agent are labeled with the agent ID. This allows for easy
