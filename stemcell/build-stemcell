@@ -39,6 +39,8 @@ name: bosh-kubernetes-ubuntu-trusty-go_agent
 version: "$stemcell_version"
 sha1: da39a3ee5e6b4b0d3255bfef95601890afd80709
 operating_system: ubuntu-trusty
+stemcell_formats:
+- raw
 cloud_properties:
   image: "evoila/kubernetes-cpi:$stemcell_version"
 MF_EOF
