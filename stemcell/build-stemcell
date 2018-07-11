@@ -9,7 +9,7 @@ set -e
 #     jq -r 'max_by(.version | tonumber) | .version + " " +.regular.url'
 # )
 
-stemcell_version=3586.16
+stemcell_version=3586.25
 stemcell_url=https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-trusty-go_agent?v=${stemcell_version}
 
 # Local directory for build
